@@ -2,11 +2,12 @@ package de.eventsourcingbook.cart.cosmetics.domain
 
 import org.axonframework.commandhandling.CommandHandler
 import org.axonframework.eventsourcing.EventSourcingHandler
+import org.axonframework.eventsourcing.SnapshotTriggerDefinition
 import org.axonframework.modelling.command.AggregateIdentifier
 import org.axonframework.modelling.command.AggregateLifecycle
 import org.axonframework.spring.stereotype.Aggregate
 
-@Aggregate(type = "cosmeticsInventory")
+@Aggregate(snapshotTriggerDefinition = "cosmeticsSnapshotTrigger")
 class CosmeticsInventoryAggregate {
     @AggregateIdentifier
     private lateinit var productId: String
