@@ -1,60 +1,137 @@
-## Understanding Eventsourcing - The Book
+# Event Sourcing Book Project 📚
 
-This is the sample project for the Book "Understanding Eventsourcing"
+Welcome to the **Event Sourcing Book Project**! This project demonstrates the implementation of an event-sourced system for managing carts, cosmetics, and inventories. It includes various modules for handling commands, events, projections, and data imports.
 
-[Buy the book on Leanpub](https://leanpub.com/eventmodeling-and-eventsourcing)
+---
 
-The first book to combine Eventmodeling, Eventsourcing to plan and build Software Systems of any size and complexity.
+## 🚀 Prerequisites
 
-The Eventmodel is here:
+Before running the project, ensure you have the following installed:
 
-[Eventmodel in Miro](https://miro.com/app/board/uXjVKvTN_NQ=/)
+- **Java 19** or later ☕
+- **Maven** (for building the project) 🛠️
+- **Docker** (for running containers, if needed) 🐳
+- **Kotlin** (for development) 💻
 
-If you want to quickly learn about Eventmodeling, here is the original article:
+---
 
-[The original Eventmodeling Article](https://eventmodeling.org/posts/what-is-event-modeling/)
+## 📂 Project Structure
 
-By subscribing to the newsletter you´ll get access to the "little" Eventmodeling Handbook, which can serve as a quick reference in addition to the book.
+The project is organized as follows:
 
-[The Little Eventmodeling Book](https://newsletter.nebulit.de/)
+- **`src/main/kotlin`**: Contains the main application code, including domain models, commands, events, and controllers.
+- **`src/main/resources`**: Configuration files such as `application.yml` and database migration scripts.
+- **`src/test/kotlin`**: Contains test cases for the application.
+- **`cosmetic_archive`**: Sample CSV files for importing cosmetics data.
 
-### Book
+---
 
-The book is written in public and current progress can always be checked [here](https://eventmodelers.de/das-eventsourcing-buch)
+## 🛠️ Setup Instructions
 
-The Github Repository including all source code can be found here:
-[Github](https://github.com/dilgerma/eventsourcing-book)
+### 1️⃣ Clone the Repository
+```bash
+git clone <repository-url>
+cd eventsourcing-book
+```
 
-### Sample Application
+### 2️⃣ Build the Project
+Use Maven to clean and compile the project:
+```bash
+mvn clean compile
+```
 
-The sample application is written in Kotlin / Spring / Axon
+### 3️⃣ Run the Application
+You can run the application using the provided batch scripts:
+- **For normal mode**:
+  ```bash
+  run-app.bat
+  ```
+- **For debug mode**:
+  ```bash
+  run-app-debug.bat
+  ```
 
-[Kotlin](https://kotlinlang.org/)
-[Spring](https://spring.io/projects/spring-framework)
-[Axon](https://www.axoniq.io/products/axon-framework)
+### 4️⃣ Run Tests
+To execute the test cases, use the following command:
+```bash
+run-cosmetics-test.bat
+```
 
-You need to have Docker installed.
+### 5️⃣ Import Cosmetics Data
+Use the `/api/import/cosmetics` endpoint to import cosmetics data from a CSV file. Example:
+```bash
+curl -X POST "http://localhost:8080/api/import/cosmetics" -d "filePath=c:\\Users\\Helix\\Desktop\\SS25\\SE2 Eng\\cosmetic_archive\\2019-Dec.csv"
+```
 
-[Docker](https://www.docker.com/)
+### 6️⃣ Access APIs
+The application exposes the following APIs:
 
-Here are the simple steps to start the application in a development environment.
+#### Inventory Management 📦
+- **Create Inventory**: `POST /api/inventory`
+- **Reduce Inventory**: `POST /api/inventory/{productId}/reduce`
+- **Increase Inventory**: `POST /api/inventory/{productId}/increase`
 
-- install IntelliJ IDEA
+#### Product Management 🛍️
+- **Create Product**: `POST /api/products`
+- **Update Product**: `PUT /api/products/{productId}`
+- **Archive Product**: `DELETE /api/products/{productId}`
 
-- Install the most recent Java SDK (File -> Project -> SDK)
+### 7️⃣ Database Migrations
+Database migrations are managed using Flyway. Migration scripts are located in `src/main/resources/db/migration`.
 
-- In the terminal type 'mvn clean install', this will do a full maven install of all the dependencies. You can do the same in IntelliJ as well.
+### 8️⃣ Docker Support
+To run the application with Docker, use the provided `docker-compose.yml` file:
+```bash
+docker-compose up
+```
 
-- Ensure you have docker running (if you don't already have it installed on your machine, you need it for testcontainers to work. on Windows just install the docker desktop app).
+---
 
-- Build the app
+## 🛠️ Troubleshooting
 
-Start the app by right-cicking on the ["ApplicationStarter"](https://github.com/dilgerma/eventsourcing-book/blob/main/src/test/kotlin/de/eventsourcingbook/cart/ApplicationStarter.kt) in src/test/kotlin and klick run.
-This will start the whole application including all dependencies.
+- If you encounter issues during compilation, ensure all dependencies are installed and the correct Java version is being used.
+- Check the `target` directory for compiled classes and logs.
 
-### Code Generation
+---
 
-The source code in the book was mostly generated directly from the Event Model. If you want to see this process in action, I can highly 
-recommend this E-Mail Course that spans 8 days currently and guides you through the process of creating your own custom Code Generator.
+## 🤝 Contributing
 
-[E-Mail Course](https://newsletter.nebulit.de/generator)
+Feel free to contribute to this project by submitting issues or pull requests. Let's build something amazing together! 🌟
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License.
+
+---
+
+## 📖 Additional Resources
+
+### Understanding Eventsourcing - The Book 📘
+
+This is the sample project for the book **"Understanding Eventsourcing"**.
+
+- [Buy the book on Leanpub](https://leanpub.com/eventmodeling-and-eventsourcing)
+- [Eventmodel in Miro](https://miro.com/app/board/uXjVKvTN_NQ=/)
+- [The original Eventmodeling Article](https://eventmodeling.org/posts/what-is-event-modeling/)
+- [The Little Eventmodeling Book](https://newsletter.nebulit.de/)
+
+### Sample Application 💻
+
+The sample application is written in:
+- [Kotlin](https://kotlinlang.org/)
+- [Spring](https://spring.io/projects/spring-framework)
+- [Axon](https://www.axoniq.io/products/axon-framework)
+
+### Quick Start 🚀
+
+1. Install IntelliJ IDEA.
+2. Install the most recent Java SDK.
+3. Run `mvn clean install` to install dependencies.
+4. Ensure Docker is running.
+5. Start the app by running the `ApplicationStarter` class in `src/test/kotlin`.
+
+---
+
+Happy coding! 🎉
