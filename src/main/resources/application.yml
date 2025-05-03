@@ -6,16 +6,16 @@ spring:
       ddl-auto: none
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
-    username: postgres
+    url: jdbc:postgresql://localhost:5432/postgres2
+    username: postgres2
     password: postgres
     driver-class-name: org.postgresql.Driver
 
 # Flyway Configuration
   flyway:
-    url: jdbc:postgresql://localhost:5432/postgres
+    url: jdbc:postgresql://localhost:5432/postgres2
     locations: classpath:db/migration
-    user: postgres
+    user: postgres2
     password: postgres
   kafka:
     producer:
@@ -29,6 +29,9 @@ spring:
       properties:
         spring.json.trusted.packages: "*"
       auto-offset-reset: earliest
+
+  testcontainers:
+    enabled: false
 
 axon:
   serializer:
@@ -47,3 +50,8 @@ axon:
 application:
   debug:
     enabled: true
+  cosmetics:
+    enabled: true
+    import:
+      batch-size: 1000
+      default-stock: 100

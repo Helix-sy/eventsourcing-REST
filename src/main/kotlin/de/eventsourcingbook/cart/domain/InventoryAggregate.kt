@@ -26,4 +26,22 @@ class InventoryAggregate {
     fun on(inventoryChangedEvent: InventoryChangedEvent) {
         this.aggregateId = inventoryChangedEvent.productId
     }
+
+    // Command Handler for adding a product
+    @CommandHandler
+    fun handle(command: AddProductCommand) {
+        AggregateLifecycle.apply(ProductAddedEvent(command.productId, command.name, command.initialStock))
+    }
+
+    // Event Sourcing Handler for ProductAddedEvent
+    @EventSourcingHandler
+    fun on(event: ProductAddedEvent) {
+        this.aggregateId = event.productId
+    }
+
+    // Commands
+    data class AddProductCommand(val productId: UUID, val name: String, val initialStock: Int)
+
+    // Events
+    data class ProductAddedEvent(val productId: UUID, val name: String, val initialStock: Int)
 }

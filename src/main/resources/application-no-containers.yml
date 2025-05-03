@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres2
+    username: postgres
+    password: admin
+    driver-class-name: org.postgresql.Driver
+  
+  flyway:
+    url: jdbc:postgresql://localhost:5432/postgres2
+    user: postgres
+    password: admin
+    locations: classpath:db/migration
+  
+  kafka:
+    bootstrap-servers: localhost:9092
+    
+  testcontainers:
+    enabled: false
+    
+application:
+  cosmetics:
+    enabled: true

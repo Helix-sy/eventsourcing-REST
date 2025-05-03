@@ -1,0 +1,8 @@
+application:
+  debug:
+    enabled: true
+  cosmetics:
+    enabled: true
+    import:
+      batch-size: 1000
+      default-stock: 100

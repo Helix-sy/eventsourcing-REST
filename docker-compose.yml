@@ -1,0 +1,49 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:14
+    container_name: postgres-cart
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=postgres2
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - cart-network
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    container_name: zookeeper-cart
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "2181:2181"
+    networks:
+      - cart-network
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    container_name: kafka-cart
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+    networks:
+      - cart-network
+
+networks:
+  cart-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
