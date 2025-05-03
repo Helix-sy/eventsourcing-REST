@@ -13,6 +13,12 @@ spring:
   
   kafka:
     bootstrap-servers: localhost:9092
+    producer:
+      properties:
+        max.request.size: 200000000
+    consumer:
+      properties:
+        fetch.max.bytes: 200000000
     
   testcontainers:
     enabled: false

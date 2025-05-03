@@ -62,6 +62,7 @@ class CosmeticsPerformanceTest {
             
             commandGateway.sendAndWait<String>(
                 CreateProductCommand(
+                    aggregateId = UUID.randomUUID(),
                     productId = productId,
                     brand = brand,
                     categoryId = "category-1",
@@ -92,6 +93,7 @@ class CosmeticsPerformanceTest {
             val productId = UUID.randomUUID().toString()
             commandGateway.sendAndWait<String>(
                 CreateProductCommand(
+                    aggregateId = UUID.randomUUID(),
                     productId = productId,
                     brand = "QueryTestBrand-${it % 10}",
                     categoryId = "category-${it % 5}",
@@ -156,6 +158,7 @@ class CosmeticsPerformanceTest {
             val productId = UUID.randomUUID().toString()
             commandGateway.sendAndWait<String>(
                 CreateProductCommand(
+                    aggregateId = UUID.randomUUID(),
                     productId = productId,
                     brand = "CartTestBrand-$it",
                     categoryId = "category-1",
@@ -166,6 +169,7 @@ class CosmeticsPerformanceTest {
             
             commandGateway.sendAndWait<String>(
                 CreateInventoryCommand(
+                    aggregateId = UUID.randomUUID(),
                     productId = productId,
                     initialStock = 100
                 )
